@@ -1,0 +1,695 @@
+{
+  "status": "passed",
+  "built_utc": "2026-11-02T23:53:26.823932+00:00",
+  "source_commit": "5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7",
+  "source_hashes_verified": true,
+  "config": {
+    "memory_limit": "128MiB",
+    "threads": "1",
+    "max_temp_directory_size": "0B"
+  },
+  "duckdb": "1.5.5",
+  "tables": {
+    "agreements": 3201,
+    "agencies": 2491
+  },
+  "checks": {
+    "agreements_rows": {
+      "actual": 3201,
+      "expected": 3201,
+      "passed": true
+    },
+    "agreements_key_nulls": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "agreements_key_duplicates": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "agencies_rows": {
+      "actual": 2491,
+      "expected": 2491,
+      "passed": true
+    },
+    "agencies_key_nulls": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "agencies_key_duplicates": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "agency_links": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "agency_summary_counts": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "termination_interval_order": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "status_domain": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    "wkb_roundtrip": {
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    }
+  },
+  "schemas": {
+    "agreements": [
+      [
+        "agency",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "agency_id",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "ORI9",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "agreement_id",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "support_type",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "jurisdiction",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "jurisdiction_facilities",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "jurisdiction_level",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "jurisdiction_level_source",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "status",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "signed_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "signed_source",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "first_appeared_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "first_appeared_source",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "last_appeared_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "removed_by_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "removed_by_source",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "removal_flag",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "moa",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "moa_pending",
+        "BOOLEAN",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "addendum",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "addendum_second",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "addendum_signed_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "addendum_signed_date_second",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "has_addendum",
+        "BOOLEAN",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "place",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "place_type",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "place_geoid",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "county",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "county_fips",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "state",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "state_fips",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "geoid",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "geoid_type",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "ice_county",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "ice_type",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "latest_sheet_row",
+        "INTEGER",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "latest_sheet",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "latest_sheet_url",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "geometry_type",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "geometry_vintage",
+        "INTEGER",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "geometry_wkb",
+        "BLOB",
+        "YES",
+        null,
+        null,
+        null
+      ]
+    ],
+    "agencies": [
+      [
+        "agency",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "agency_id",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "ORI9",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "jurisdiction_level",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "has_active",
+        "BOOLEAN",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "n_agreements",
+        "INTEGER",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "n_active",
+        "INTEGER",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "first_appeared_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "last_appeared_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "last_removed_by_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "first_signed_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "last_signed_date",
+        "DATE",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "models",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "model_history",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "place",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "place_type",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "place_geoid",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "county",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "county_fips",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "state",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "state_fips",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "geoid",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ],
+      [
+        "geoid_type",
+        "VARCHAR",
+        "YES",
+        null,
+        null,
+        null
+      ]
+    ]
+  },
+  "null_counts": {
+    "agreements": {
+      "agency": 0,
+      "agency_id": 0,
+      "ORI9": 141,
+      "agreement_id": 0,
+      "support_type": 0,
+      "jurisdiction": 2,
+      "jurisdiction_facilities": 2449,
+      "jurisdiction_level": 0,
+      "jurisdiction_level_source": 0,
+      "status": 0,
+      "signed_date": 0,
+      "signed_source": 0,
+      "first_appeared_date": 1,
+      "first_appeared_source": 1,
+      "last_appeared_date": 1,
+      "removed_by_date": 2726,
+      "removed_by_source": 2726,
+      "removal_flag": 3175,
+      "moa": 3,
+      "moa_pending": 0,
+      "addendum": 3042,
+      "addendum_second": 3199,
+      "addendum_signed_date": 3042,
+      "addendum_signed_date_second": 3199,
+      "has_addendum": 0,
+      "place": 1960,
+      "place_type": 1960,
+      "place_geoid": 1960,
+      "county": 125,
+      "county_fips": 125,
+      "state": 0,
+      "state_fips": 0,
+      "geoid": 120,
+      "geoid_type": 120,
+      "ice_county": 510,
+      "ice_type": 282,
+      "latest_sheet_row": 1,
+      "latest_sheet": 1,
+      "latest_sheet_url": 1,
+      "geometry_type": 406,
+      "geometry_vintage": 1158,
+      "geometry_wkb": 0
+    },
+    "agencies": {
+      "agency": 0,
+      "agency_id": 0,
+      "ORI9": 117,
+      "jurisdiction_level": 0,
+      "has_active": 0,
+      "n_agreements": 0,
+      "n_active": 0,
+      "first_appeared_date": 1,
+      "last_appeared_date": 1,
+      "last_removed_by_date": 2339,
+      "first_signed_date": 0,
+      "last_signed_date": 0,
+      "models": 0,
+      "model_history": 0,
+      "place": 1285,
+      "place_type": 1285,
+      "place_geoid": 1285,
+      "county": 93,
+      "county_fips": 93,
+      "state": 0,
+      "state_fips": 0,
+      "geoid": 110,
+      "geoid_type": 110
+    }
+  },
+  "profile": {
+    "status_counts": [
+      [
+        "Active",
+        2725
+      ],
+      [
+        "Removed",
+        273
+      ],
+      [
+        "Superseded",
+        203
+      ]
+    ],
+    "signed_range": [
+      "2002-07-02",
+      "2026-10-27",
+      "2026-10-28"
+    ],
+    "empty_geometry": 406
+  },
+  "database_bytes": 15478784,
+  "database_sha256": "78ce2f63df3c0f37877085d74eee52fdc167b5eec5ccd39f48a75eb1381426f0",
+  "output": "ice-287g.duckdb"
+}

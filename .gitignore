@@ -1,0 +1,11 @@
+sources/*.parquet
+sources/*.part
+*.duckdb
+*.duckdb.wal
+__pycache__/
+.pytest_cache/
+.venv/
+.*-build-*/
+evidence/
+source-profile.json
+source-geoparquet-metadata.json
