@@ -1,19 +1,19 @@
 {
-  "acquired_utc": "2026-11-02T23:50:01.242443+00:00",
+  "acquired_utc": "2026-11-16T17:02:33.438025+00:00",
   "publisher": "Deportation Data Project",
   "data_license": "CC0-1.0",
-  "source_commit": "5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7",
+  "source_commit": "906601f9901555012fb49f19c66c569af1883a0b",
   "sources": [
     {
       "repo": "deportationdata/ice-287g",
-      "commit": "5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7",
+      "commit": "906601f9901555012fb49f19c66c569af1883a0b",
       "path": "data/agencies.parquet",
-      "url": "https://github.com/deportationdata/ice-287g/raw/5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7/data/agencies.parquet",
-      "bytes": 174633,
-      "expected_full_sha256": "a5765a20fd66e6840cda57f0a1c7ebbf2bc478d59b0e020ec94b758e496f8a61",
+      "url": "https://github.com/deportationdata/ice-287g/raw/906601f9901555012fb49f19c66c569af1883a0b/data/agencies.parquet",
+      "bytes": 177343,
+      "expected_full_sha256": "e9d79a5e32e3ccf36a672e714d5de05a041bbf6ce465e4f6006e727ae3df0fb2",
       "full_hash_verified": true,
       "local_path": "sources/agencies.parquet",
-      "rows": 2491,
+      "rows": 2535,
       "duckdb_schema": [
         [
           "agency",
@@ -203,14 +203,14 @@
     },
     {
       "repo": "deportationdata/ice-287g",
-      "commit": "5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7",
+      "commit": "906601f9901555012fb49f19c66c569af1883a0b",
       "path": "data/agreements-sf.parquet",
-      "url": "https://github.com/deportationdata/ice-287g/raw/5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7/data/agreements-sf.parquet",
-      "bytes": 10297833,
-      "expected_full_sha256": "a710dc3a7e3101258d32dbfbb31cc6c35eab9cbc8d7702ecf3668f8dc9bd5106",
+      "url": "https://github.com/deportationdata/ice-287g/raw/906601f9901555012fb49f19c66c569af1883a0b/data/agreements-sf.parquet",
+      "bytes": 10481449,
+      "expected_full_sha256": "7d8ca966115868686e18dddbd83a1605b93c0d649f95dd2e47665c5e191e11ad",
       "full_hash_verified": true,
       "local_path": "sources/agreements-sf.parquet",
-      "rows": 3201,
+      "rows": 3257,
       "duckdb_schema": [
         [
           "agency",

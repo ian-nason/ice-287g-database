@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "built_utc": "2026-11-02T23:53:26.823932+00:00",
-  "source_commit": "5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7",
+  "built_utc": "2026-11-16T17:02:39.716664+00:00",
+  "source_commit": "906601f9901555012fb49f19c66c569af1883a0b",
   "source_hashes_verified": true,
   "config": {
     "memory_limit": "128MiB",
@@ -10,13 +10,13 @@
   },
   "duckdb": "1.5.5",
   "tables": {
-    "agreements": 3201,
-    "agencies": 2491
+    "agreements": 3257,
+    "agencies": 2535
   },
   "checks": {
     "agreements_rows": {
-      "actual": 3201,
-      "expected": 3201,
+      "actual": 3257,
+      "expected": 3257,
       "passed": true
     },
     "agreements_key_nulls": {
@@ -30,8 +30,8 @@
       "passed": true
     },
     "agencies_rows": {
-      "actual": 2491,
-      "expected": 2491,
+      "actual": 2535,
+      "expected": 2535,
       "passed": true
     },
     "agencies_key_nulls": {
@@ -600,11 +600,11 @@
     "agreements": {
       "agency": 0,
       "agency_id": 0,
-      "ORI9": 141,
+      "ORI9": 143,
       "agreement_id": 0,
       "support_type": 0,
       "jurisdiction": 2,
-      "jurisdiction_facilities": 2449,
+      "jurisdiction_facilities": 2497,
       "jurisdiction_level": 0,
       "jurisdiction_level_source": 0,
       "status": 0,
@@ -613,19 +613,19 @@
       "first_appeared_date": 1,
       "first_appeared_source": 1,
       "last_appeared_date": 1,
-      "removed_by_date": 2726,
-      "removed_by_source": 2726,
-      "removal_flag": 3175,
+      "removed_by_date": 2775,
+      "removed_by_source": 2775,
+      "removal_flag": 3230,
       "moa": 3,
       "moa_pending": 0,
-      "addendum": 3042,
-      "addendum_second": 3199,
-      "addendum_signed_date": 3042,
-      "addendum_signed_date_second": 3199,
+      "addendum": 3098,
+      "addendum_second": 3255,
+      "addendum_signed_date": 3098,
+      "addendum_signed_date_second": 3255,
       "has_addendum": 0,
-      "place": 1960,
-      "place_type": 1960,
-      "place_geoid": 1960,
+      "place": 1990,
+      "place_type": 1990,
+      "place_geoid": 1990,
       "county": 125,
       "county_fips": 125,
       "state": 0,
@@ -637,28 +637,28 @@
       "latest_sheet_row": 1,
       "latest_sheet": 1,
       "latest_sheet_url": 1,
-      "geometry_type": 406,
-      "geometry_vintage": 1158,
+      "geometry_type": 410,
+      "geometry_vintage": 1170,
       "geometry_wkb": 0
     },
     "agencies": {
       "agency": 0,
       "agency_id": 0,
-      "ORI9": 117,
+      "ORI9": 119,
       "jurisdiction_level": 0,
       "has_active": 0,
       "n_agreements": 0,
       "n_active": 0,
       "first_appeared_date": 1,
       "last_appeared_date": 1,
-      "last_removed_by_date": 2339,
+      "last_removed_by_date": 2381,
       "first_signed_date": 0,
       "last_signed_date": 0,
       "models": 0,
       "model_history": 0,
-      "place": 1285,
-      "place_type": 1285,
-      "place_geoid": 1285,
+      "place": 1303,
+      "place_type": 1303,
+      "place_geoid": 1303,
       "county": 93,
       "county_fips": 93,
       "state": 0,
@@ -671,25 +671,25 @@
     "status_counts": [
       [
         "Active",
-        2725
+        2774
       ],
       [
         "Removed",
-        273
+        279
       ],
       [
         "Superseded",
-        203
+        204
       ]
     ],
     "signed_range": [
       "2002-07-02",
-      "2026-10-27",
-      "2026-10-28"
+      "2026-11-08",
+      "2026-11-10"
     ],
-    "empty_geometry": 406
+    "empty_geometry": 410
   },
-  "database_bytes": 15478784,
-  "database_sha256": "78ce2f63df3c0f37877085d74eee52fdc167b5eec5ccd39f48a75eb1381426f0",
+  "database_bytes": 16003072,
+  "database_sha256": "426cb943d67d3de5537dbe245f889b4e948d0e072d3de8699e3df4911c410970",
   "output": "ice-287g.duckdb"
 }

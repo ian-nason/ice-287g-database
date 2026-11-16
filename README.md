@@ -1,6 +1,6 @@
 # ICE 287(g) agreements and agencies in DuckDB
 
-Agreement history and agency records for ICE’s 287(g) immigration-enforcement partnerships, assembled by the Deportation Data Project. Use the 3,201 agreement records and 2,491 agency records to study recorded participation, agreement models and timing. Signing dates span July 2002–October 2026, with listings through October 28, 2026. Status is snapshot-specific. Removal timing is bounded by recorded dates where available; some bounds are missing. Agreement counts do not measure arrests or enforcement intensity.
+Agreement history and agency records for ICE’s 287(g) immigration-enforcement partnerships, assembled by the Deportation Data Project. Use the 3,257 agreement records and 2,535 agency records to study recorded participation, agreement models and timing. Signing dates span July 2002–November 2026, with listings through November 10, 2026. Status is snapshot-specific. Removal timing is bounded by recorded dates where available; some bounds are missing. Agreement counts do not measure arrests or enforcement intensity.
 
 ## Start querying
 
@@ -48,14 +48,14 @@ See the [data dictionary](https://huggingface.co/datasets/Nason/ice-287g-databas
 
 | Table | Unit | Rows |
 |---|---|---:|
-| `agreements` | One agreement, including renewed and superseded agreements | 3,201 |
-| `agencies` | One participating agency, with agreement summaries | 2,491 |
+| `agreements` | One agreement, including renewed and superseded agreements | 3,257 |
+| `agencies` | One participating agency, with agreement summaries | 2,535 |
 
-The total of 5,692 table rows mixes units; it is not a count
+The total of 5,792 table rows mixes units; it is not a count
 of people or unique participating places. There are 2,725 active, 273 removed and
 203 superseded agreements in this snapshot.
 
-The latest observed listing is October 28, 2026; signing dates span July 2, 2002 through October 27, 2026. These observation dates are distinct from the November 2 local build date.
+The latest observed listing is November 10, 2026; signing dates span July 2, 2002 through November 8, 2026. These observation dates are distinct from the November 16 build date.
 
 Join the tables using `agency_id` within this snapshot. `agreement_id` is unique
 in `agreements`; `agency_id` is unique in `agencies`. An agency may have several
@@ -147,23 +147,23 @@ tryCatch(print(DBI::dbGetQuery(con, "SELECT status,count(*) AS agreements FROM a
 
 ### Version and provenance
 
-The 15,478,784-byte database contains `_metadata`, `_columns`, `_provenance` and `_geometry_metadata`.
+The 16,003,072-byte database contains `_metadata`, `_columns`, `_provenance` and `_geometry_metadata`.
 
 Source: [Deportation Data Project (public records and FOIA)](https://deportationdata.org/docs/ice/codebook-287g.html). License: CC0-1.0 data.
 
 Both inputs are pinned to publisher commit
-`5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7` (November 1, 2026). Complete file sizes, SHA-256 values and immutable URLs are recorded in
+`906601f9901555012fb49f19c66c569af1883a0b` (November 11, 2026). Complete file sizes, SHA-256 values and immutable URLs are recorded in
 [source-manifest.json](source-manifest.json). Both source hashes were verified.
 
 Sources: [publisher catalog](https://deportationdata.org/data/processed/ice.html),
 [codebook](https://deportationdata.org/docs/ice/codebook-287g.html), and
-[immutable source repository](https://github.com/deportationdata/ice-287g/tree/5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7).
+[immutable source repository](https://github.com/deportationdata/ice-287g/tree/906601f9901555012fb49f19c66c569af1883a0b).
 The repository's [CC0-1.0 data license](LICENSE-DATA) is retained. Cite the
 Deportation Data Project, its source commit and Labia and Blair's 2026 codebook.
 
 All source fields and rows are retained. The sole storage conversion is upstream `geometry` to `geometry_wkb`, a standard WKB BLOB produced by `ST_AsWKB`; no coordinates are transformed.
 
-Snapshot SHA-256 `78ce2f63df3c0f37877085d74eee52fdc167b5eec5ccd39f48a75eb1381426f0` (15,478,784 bytes). The registry PR pins immutable Hugging Face revisions; a later `main` may refer to a newer snapshot.
+Snapshot SHA-256 `426cb943d67d3de5537dbe245f889b4e948d0e072d3de8699e3df4911c410970` (16,003,072 bytes). The registry pins immutable Hugging Face revisions; a later `main` may refer to a newer snapshot.
 
 ### Rebuild and checks
 
@@ -193,3 +193,8 @@ definitions, and repeating Python/R tests. No automatic update schedule is impli
 Public `datapond.connect('ice-287g')` and `dp_connect('ice-287g')` use the live Datapond catalog. Separately, the build's smoke runner tests the released clients against a temporary localhost registry and this exact artifact.
 
 The retained build smoke scripts use an isolated registry with the same database.
+
+
+### November 16, 2026 refresh
+
+Refreshed both pinned publisher inputs through the November 10 listing. The schema is unchanged; all source rows and fields are retained with the documented geometry serialization. The build contains 3,257 agreements (2,774 Active, 279 Removed, 204 Superseded) and 2,535 agencies. Exact source equality, 11 integrity checks and five builder unit tests passed. Source pins and the complete per-field missingness record accompany this release.
