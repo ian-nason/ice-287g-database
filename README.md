@@ -1,40 +1,74 @@
 # ICE 287(g) agreements and agencies in DuckDB
 
-This frozen Datapond snapshot packages the Deportation Data Project's agreement
-history and agency reference table. It adds policy participation, timing and
-jurisdiction information to the existing enforcement-event database. The catalog identifier requires the separate registry integration described below.
+Agreement history and agency records for ICE’s 287(g) immigration-enforcement partnerships, assembled by the Deportation Data Project. Use the 3,201 agreement records and 2,491 agency records to study recorded participation, agreement models and timing. Signing dates span July 2002–October 2026, with listings through October 28, 2026. Status is snapshot-specific. Removal timing is bounded by recorded dates where available; some bounds are missing. Agreement counts do not measure arrests or enforcement intensity.
+
+## Start querying
+
+Count agreement records by recorded status. Agreement counts differ from participating-agency counts.
+
+Choose R or Python. Install datapond once: use `install.packages("datapond")` in R, or run `python -m pip install datapond` in a terminal.
+
+### R
+
+```r
+library(datapond)
+con <- dp_connect("ice-287g")
+tryCatch({
+  DBI::dbExecute(con, "SET threads=1")
+  DBI::dbExecute(con, "SET memory_limit='128MiB'")
+  DBI::dbExecute(con, "SET max_temp_directory_size='0B'")
+  print(DBI::dbGetQuery(con, "SELECT status,count(*) AS agreements FROM agreements GROUP BY status ORDER BY status"))
+}, finally = dp_disconnect(con))
+```
+
+### Python
+
+```python
+import datapond
+con = datapond.connect('ice-287g')
+try:
+    con.execute("SET threads=1")
+    con.execute("SET memory_limit='128MiB'")
+    con.execute("SET max_temp_directory_size='0B'")
+    print(con.execute("""SELECT status,count(*) AS agreements FROM agreements GROUP BY status ORDER BY status""").fetchall())
+finally:
+    con.close()
+```
+
+Queries run on your computer and read the byte ranges they need. A small result can still require a large scan. These examples limit DuckDB to one thread and a 128 MiB buffer pool with disk spill disabled; that is not a limit on the entire R or Python process. Larger analyses may need more memory or a local download with enough disk space.
+
+<a id="coverage-fields-and-sources"></a>
+<a id="additional-dataset-notes"></a>
+
+## Tables, fields and joins
+
+The two tables add policy participation, timing and jurisdiction information to the existing enforcement-event database. The dataset identifier is available in the live Datapond catalog.
+
+See the [data dictionary](https://huggingface.co/datasets/Nason/ice-287g-database/resolve/5e82acce6a20c3f2a73e2c6b504ed60cf9e40b48/DICTIONARY.md) for column definitions.
 
 | Table | Unit | Rows |
 |---|---|---:|
 | `agreements` | One agreement, including renewed and superseded agreements | 3,201 |
 | `agencies` | One participating agency, with agreement summaries | 2,491 |
 
-The 15,478,784-byte database contains `_metadata`, `_columns`, `_provenance` and
-`_geometry_metadata`. The total of 5,692 table rows mixes units; it is not a count
+The total of 5,692 table rows mixes units; it is not a count
 of people or unique participating places. There are 2,725 active, 273 removed and
 203 superseded agreements in this snapshot.
 
-## Version and provenance
-
-Both inputs are pinned to publisher commit
-`5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7` (November 1, 2026). The latest observed
-listing is October 28; signing dates span July 2, 2002 through October 27, 2026.
-These source observation dates are distinct from the November 2 local build date.
-Complete file sizes, SHA-256 values and immutable URLs are recorded in
-[source-manifest.json](source-manifest.json). Both source hashes were verified.
-
-Sources: [publisher catalog](https://deportationdata.org/data/processed/ice.html),
-[codebook](https://deportationdata.org/docs/ice/codebook-287g.html), and
-[immutable source repository](https://github.com/deportationdata/ice-287g/tree/5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7).
-The repository's [CC0-1.0 data license](LICENSE-DATA) is retained. Cite the
-Deportation Data Project, its source commit and Labia and Blair's 2026 codebook.
-
-## Use and interpretation
+The latest observed listing is October 28, 2026; signing dates span July 2, 2002 through October 27, 2026. These observation dates are distinct from the November 2 local build date.
 
 Join the tables using `agency_id` within this snapshot. `agreement_id` is unique
 in `agreements`; `agency_id` is unique in `agencies`. An agency may have several
 models or renewals, with overlapping times and jurisdictions. No person linkage
 to EOIR, USCIS or the ICE enforcement records is asserted.
+
+`ORI9` means the publisher-matched Originating Agency Identifier(s). FIPS fields are geographic codes for states or counties; preserve them as text. `support_type` identifies the agreement model: Task Force, Jail Enforcement, Warrant Service Officer or a historical combined model.
+
+Geometry stores the mapped location or jurisdiction shape. This source uses WGS84/EPSG:4326; geometry coordinates follow the publisher’s WKB, and original Arrow/CRS metadata is preserved in `_geometry_metadata`. Empty geometry is not the same as SQL NULL.
+
+[DICTIONARY.md](DICTIONARY.md) lists every field, its type, exact missing count and definition.
+
+## Use and interpretation
 
 The dates `last_appeared_date` and `removed_by_date` bound a termination interval;
 neither is an exact termination date. Historical intervals may be wide. Current
@@ -55,14 +89,16 @@ split them into a bridge before joining, preserving leading zeros. Check geograp
 Agency `last_removed_by_date` is deliberately NULL while any agreement is Active;
 other missing aggregate dates also do not establish that an agency was never listed.
 
-All source fields and rows are retained. The sole storage conversion is upstream
-`geometry` to `geometry_wkb`, a standard WKB BLOB produced by `ST_AsWKB`; no
-coordinates are transformed. This source uses WGS84/EPSG:4326; geometry coordinates
-follow the publisher's WKB, and original Arrow/CRS metadata is preserved in
-`_geometry_metadata`. [DICTIONARY.md](DICTIONARY.md) lists every field, its type,
-exact missing count and definition.
+<a id="advanced-access-local-queries"></a>
+<a id="snapshot-files"></a>
 
-## Local queries
+## Other ways to connect
+
+[Download the database](https://huggingface.co/datasets/Nason/ice-287g-database/resolve/main/ice-287g.duckdb), [browse its files](https://huggingface.co/datasets/Nason/ice-287g-database/tree/main), or inspect the [reproducible source](https://github.com/ian-nason/ice-287g-database).
+
+The first-use examples above use the live catalog. Local examples work with the downloaded snapshot.
+
+### Local DuckDB queries
 
 Python (DuckDB 1.5 or later):
 
@@ -88,11 +124,48 @@ tryCatch({
 }, finally=dbDisconnect(con, shutdown=TRUE))
 ```
 
-Public `datapond.connect('ice-287g')` and `dp_connect('ice-287g')` require a future
-catalog release. The separate smoke runner tests the released clients against a
-temporary localhost registry and this exact artifact.
+### Additional catalog connection examples
 
-## Rebuild and checks
+The first query above is the recommended package start. These retained alternatives run the same question through the live catalog.
+
+```python
+import datapond
+con = datapond.connect("ice-287g")
+try:
+    print(con.sql("SELECT status,count(*) AS agreements FROM agreements GROUP BY status ORDER BY status").fetchall())
+finally:
+    con.close()
+```
+
+```r
+library(datapond)
+con <- dp_connect("ice-287g")
+tryCatch(print(DBI::dbGetQuery(con, "SELECT status,count(*) AS agreements FROM agreements GROUP BY status ORDER BY status")), finally=DBI::dbDisconnect(con, shutdown=TRUE))
+```
+
+## Sources and maintenance
+
+### Version and provenance
+
+The 15,478,784-byte database contains `_metadata`, `_columns`, `_provenance` and `_geometry_metadata`.
+
+Source: [Deportation Data Project (public records and FOIA)](https://deportationdata.org/docs/ice/codebook-287g.html). License: CC0-1.0 data.
+
+Both inputs are pinned to publisher commit
+`5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7` (November 1, 2026). Complete file sizes, SHA-256 values and immutable URLs are recorded in
+[source-manifest.json](source-manifest.json). Both source hashes were verified.
+
+Sources: [publisher catalog](https://deportationdata.org/data/processed/ice.html),
+[codebook](https://deportationdata.org/docs/ice/codebook-287g.html), and
+[immutable source repository](https://github.com/deportationdata/ice-287g/tree/5f4b3630a0eedc5ecaff8e8c065d1ce1438e44b7).
+The repository's [CC0-1.0 data license](LICENSE-DATA) is retained. Cite the
+Deportation Data Project, its source commit and Labia and Blair's 2026 codebook.
+
+All source fields and rows are retained. The sole storage conversion is upstream `geometry` to `geometry_wkb`, a standard WKB BLOB produced by `ST_AsWKB`; no coordinates are transformed.
+
+Snapshot SHA-256 `78ce2f63df3c0f37877085d74eee52fdc167b5eec5ccd39f48a75eb1381426f0` (15,478,784 bytes). The registry PR pins immutable Hugging Face revisions; a later `main` may refer to a newer snapshot.
+
+### Rebuild and checks
 
 The build uses Python 3.11+, DuckDB 1.5.5 and the exact datapond-build dependency
 revision in `pyproject.toml`. With those dependencies installed:
@@ -117,25 +190,6 @@ Source updates may be frequent, but this is a manual frozen snapshot: refresh by
 reviewing a new publisher commit, updating both source pins, auditing schema and
 definitions, and repeating Python/R tests. No automatic update schedule is implied.
 
-## Snapshot files
+Public `datapond.connect('ice-287g')` and `dp_connect('ice-287g')` use the live Datapond catalog. Separately, the build's smoke runner tests the released clients against a temporary localhost registry and this exact artifact.
 
-[Download the database](https://huggingface.co/datasets/Nason/ice-287g-database/resolve/main/ice-287g.duckdb), [browse its files](https://huggingface.co/datasets/Nason/ice-287g-database/tree/main), or inspect the [reproducible source](https://github.com/ian-nason/ice-287g-database). Verify the snapshot SHA-256 `78ce2f63df3c0f37877085d74eee52fdc167b5eec5ccd39f48a75eb1381426f0` (15,478,784 bytes). The registry PR pins immutable Hugging Face revisions; a later `main` may refer to a newer snapshot.
-
-Once the separate catalog entry is merged, use the released clients:
-
-```python
-import datapond
-con = datapond.connect("ice-287g")
-try:
-    print(con.sql("SELECT status,count(*) AS agreements FROM agreements GROUP BY status ORDER BY status").fetchall())
-finally:
-    con.close()
-```
-
-```r
-library(datapond)
-con <- dp_connect("ice-287g")
-tryCatch(print(DBI::dbGetQuery(con, "SELECT status,count(*) AS agreements FROM agreements GROUP BY status ORDER BY status")), finally=DBI::dbDisconnect(con, shutdown=TRUE))
-```
-
-Until catalog integration, the local Python/R examples above work with the downloaded snapshot. The smoke scripts exercise both released clients with an isolated registry and this same database.
+The retained build smoke scripts use an isolated registry with the same database.
